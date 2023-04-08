@@ -453,6 +453,7 @@ namespace SelfCareProj
             }
             else
             {
+                GameOutputScreen.Clear();
                 GameOutputScreen.AppendText("this is too late, you will wake up drowsy and drained, this is good for neither your mental or physical health, " +
                     "may stop you from waking up on time, may keep you unfocused for the day, I would not do this, nor suggest anyone do this." + Environment.NewLine + "{stress +10}");
                 UpdateStressBar(10);
@@ -553,7 +554,7 @@ namespace SelfCareProj
 
         public void UpdateStressBar(int x)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(50);
             if (StressBar.Value + x > baseStressValue && StressBar.Value + x < 100) 
             { 
                 StressBar.Value += x;
@@ -564,11 +565,11 @@ namespace SelfCareProj
             }
             else
             {
+                GameOutputScreen.Clear();
                 StressBar.Value = 100;
-                StressBar.ForeColor = Color.Red;
                 GameOutputScreen.Clear();
                 GameOutputScreen.AppendText("Oh no! you got too stressed and reached burnout, maybe you can try again." + Environment.NewLine + "the application will automatically close momentarily");
-                Thread.Sleep(5000);
+                Task.Delay(5000).Wait();
                 Application.Exit();
             }
         }
